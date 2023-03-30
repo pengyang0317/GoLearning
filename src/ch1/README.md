@@ -1,6 +1,8 @@
 <!-- > go test -bench ".*"
 go的基础测试用例 -->
 
+[TOC]
+
 ## 单元测试
 
 完整代码地址： <https://github1s.com/pengyang0317/GoLearning/blob/main/src/ch1/ch1_test.go>

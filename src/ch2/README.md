@@ -1,6 +1,8 @@
 
 # go 语言中的并发编程
 
+[TOC]
+
 完整代码地址： <https://github1s.com/pengyang0317/GoLearning/blob/main/src/ch2/main.go>
 
 ### 1.协程提高CPU利用率
@@ -412,3 +414,44 @@ func Lselect() {
 在Go语言中，可以使用context包来解决goroutine之间的信息传递问题。context包提供了一种机制，用于在goroutine之间传递上下文信息，并提供了在超时、取消等情况下协调goroutine的方法。
 
 context包中提供了context.Context类型，表示一个上下文信息。在一个goroutine中创建一个Context对象，并将其传递给其他goroutine，其他goroutine可以使用该对象来获取上下文信息，并进行相应的处理。
+
+```
+// 用context 控制多个goroutine的退出
+func Lcontext() {
+ //在程序中，首先使用context.Background()函数创建一个根上下文对象，并使用context.WithCancel()函数创建一个可取消的上下文对象。然后，创建两个goroutine
+ var ctx, cancel = context.WithCancel(context.Background())
+ var g1 = func(ctx context.Context) {
+  for {
+   select {
+   case <-ctx.Done():
+    fmt.Printf("g1 done\n")
+    return
+   default:
+    fmt.Printf("g1 running\n")
+    time.Sleep(time.Second)
+   }
+  }
+ }
+
+ var g2 = func(ctx context.Context) {
+  for {
+   select {
+   case <-ctx.Done():
+    fmt.Printf("g2 done\n")
+    return
+   default:
+    fmt.Printf("g2 running\n")
+    time.Sleep(time.Second)
+   }
+  }
+ }
+
+ go g1(ctx)
+ go g2(ctx)
+
+ time.Sleep(5 * time.Second)
+ //在主函数中，等待一段时间后，调用cancel()函数取消上下文对象。程序退出。
+ cancel()
+ fmt.Printf("监控完成\n")
+}
+```
