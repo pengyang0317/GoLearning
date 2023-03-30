@@ -1,6 +1,8 @@
 
 # go 语言中的并发编程
 
+完整代码地址： <https://github1s.com/pengyang0317/GoLearning/blob/main/src/ch2/main.go>
+
 ### 1.协程提高CPU利用率
 
 多进程、多线程已经提高了系统的并发能力，但是在当今互联网高并发场景下，为每个任务都创建一个线程是不现实的，因为会消耗大量的内存 (进程虚拟内存会占用 4GB [32 位操作系统], 而线程也要大约 4MB)。
@@ -404,7 +406,6 @@ func Lselect() {
 }
 
 ```
-
 
 ### 13.通过context解决goroutine的信息传递
 
