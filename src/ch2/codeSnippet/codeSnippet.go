@@ -87,7 +87,6 @@ func Lchannel2() {
 	}(ch)
 
 	time.Sleep(1 * time.Second)
-
 }
 
 // 利用channel 交替打印
@@ -133,7 +132,12 @@ func Lselect() {
 		ch <- struct{}{}
 	}
 
-	var g1c, g2c = make(chan struct{}), make(chan struct{})
+	//在这段代码中，两个goroutine g1 和 g2 分别在睡眠 1 秒和 2 秒后向其对应的通道中发送一个空的结构体 struct{}。主函数中使用了一个 select 语句来等待两个goroutine的完成情况。如果两个goroutine都完成了，则打印 "g1 done" 和 "g2 done"；如果超时了，则打印 "default"。
+
+	//这段代码的主要问题在于使用了无缓冲通道，因此在 g1 和 g2 运行之前，主函数会一直阻塞等待通道的读取。这会导致程序的执行效率较低，因为 g1 和 g2 的执行时间很短，但是主函数需要等待很长时间才能得到结果。
+
+	//为了优化这段代码，可以使用带缓冲通道来代替无缓冲通道。这样，在 g1 和 g2 运行之前，主函数可以先向带缓冲通道中写入一个空的结构体 struct{}，从而避免了阻塞等待的问题
+	var g1c, g2c = make(chan struct{}, 1), make(chan struct{}, 1)
 
 	go g1(g1c)
 	go g2(g2c)
@@ -153,9 +157,9 @@ func Lselect() {
 	}
 }
 
-
-//用context 控制多个goroutine的退出
+// 用context 控制多个goroutine的退出
 func Lcontext() {
+	//在程序中，首先使用context.Background()函数创建一个根上下文对象，并使用context.WithCancel()函数创建一个可取消的上下文对象。然后，创建两个goroutine
 	var ctx, cancel = context.WithCancel(context.Background())
 	var g1 = func(ctx context.Context) {
 		for {
@@ -187,6 +191,7 @@ func Lcontext() {
 	go g2(ctx)
 
 	time.Sleep(5 * time.Second)
+	//在主函数中，等待一段时间后，调用cancel()函数取消上下文对象。程序退出。
 	cancel()
 	fmt.Printf("监控完成\n")
 }

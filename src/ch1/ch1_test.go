@@ -6,8 +6,25 @@ import (
 	"testing"
 )
 
-// 表格驱动测试
+// 单元测试
 func TestAdd(t *testing.T) {
+	if got := Add(1, 2); got != 3 {
+		t.Errorf("Add(1,2) = %d; want 3", got)
+	}
+}
+
+// 跳过耗时的单元测试
+func TestSkip(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping test in short mode.")
+	}
+	if got := Add(1, 2); got != 3 {
+		t.Errorf("Add(1,2) = %d; want 3", got)
+	}
+}
+
+// 表格驱动测试
+func TestTableAdd(t *testing.T) {
 	var tests = []struct {
 		ia, ib, want int
 	}{

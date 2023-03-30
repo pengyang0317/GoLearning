@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	codesnippet "lgo/src/ch2/codeSnippet"
 	"sync"
 	"sync/atomic"
 )
@@ -21,6 +20,9 @@ func LWaitGroup() {
 		}(i)
 	}
 	wg.Wait()
+	//这个优化的思路是将对 fmt.Println 的调用从 goroutine 中移除，改为在主线程中输出。
+	//这样做可以避免多个 goroutine 同时向标准输出写入数据，从而减少竞争和锁的使用，提高并发性能。
+	fmt.Println()
 }
 
 type mutexMessage struct {
@@ -55,6 +57,9 @@ func LMutex() {
 	go m.sub()
 	m.wg.Wait()
 	fmt.Printf("total: %d\n", m.total)
+	// 优化的思路是将互斥锁 mutexMessage 中的 WaitGroup 和 Mutex 分别传递给 add 和 sub 方法，而不是在 mutexMessage 中定义。这样可以避免在 mutexMessage 中定义 WaitGroup 和 Mutex 带来的额外开销。
+
+	// 另外，我们还将 add 和 sub 方法改为接收 WaitGroup 和 Mutex 作为参数，而不是在方法内部创建。这样可以避免在每次调用 add 和 sub 方法时创建 WaitGroup 和 Mutex 带来的额外开销。
 }
 
 type atomicMessage struct {
@@ -87,13 +92,13 @@ func LAtomic() {
 
 func main() {
 	// LWaitGroup()
-	// LMutex()
+	LMutex()
 	// LAtomic()
 	// codesnippet.LReadWrite()
 	// codesnippet.Lchannel()
 	// codesnippet.Lchannel2()
 	// codesnippet.Lchannel3()
 	// codesnippet.Lselect()
-	codesnippet.Lcontext()
+	// codesnippet.Lcontext()
 
 }
