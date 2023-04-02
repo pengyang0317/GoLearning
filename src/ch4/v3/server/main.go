@@ -12,13 +12,20 @@ type Server struct {
 	streampb.UnimplementedGreeterServer
 }
 
+// 服务端流模式
+func (s *Server) ServerStream(*streampb.StreamRequest, streampb.Greeter_ServerStreamServer) error {
+	return nil
+}
 
-	// // 服务端流模式
-	// ServerStream(*StreamRequest, Greeter_ServerStreamServer) error
-	// // 客户端流模式
-	// ClientStream(Greeter_ClientStreamServer) error
-	// // 双向流模式
-	// AllStreeam(Greeter_AllStreeamServer) error
+// 客户端流模式
+func (s *Server) ClientStream(streampb.Greeter_ClientStreamServer) error {
+	return nil
+}
+
+// 双向流模式
+func (s *Server) AllStreeam(streampb.Greeter_AllStreeamServer) error {
+	return nil
+}
 
 func main() {
 
