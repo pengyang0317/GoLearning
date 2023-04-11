@@ -1,0 +1,96 @@
+syntax = "proto3";
+option go_package=".;userpb";
+
+
+message GetUserRequest {
+    int32 page = 1;
+    int32 size = 2;
+}
+
+message User {
+    int32 id = 1;
+    string passWord = 2;
+    string mobile = 3;
+    string nickName = 4;
+    uint64 birthDay = 5;
+    string gender = 6;
+    int32 role = 7;
+}
+
+message GetUserResponse {
+    int32 totol = 1;
+    repeated User data = 2;
+}
+
+
+message GetUserByMobileRequest {
+    string mobile = 1;
+}
+
+message GetUserByMobileResponse {
+    User user = 1;
+}
+
+
+message GetUserByIdRequest {
+    int32 id = 1;
+}
+
+message GetUserByIdResponse {
+    User user = 1;
+}
+
+
+message CreateUserRequest {
+    string nickName = 1;
+    string passWord = 2;
+    string mobile = 3;
+}
+
+message CreateUserResponse {
+    User user = 1;
+}
+
+
+message UpdateUserRequest {
+    int32 id =1 ;
+    string nickName = 2;
+    string gender = 3;
+    uint64 birthDay = 4;
+}
+
+message UpdateUserResponse {
+    User user = 1;
+}
+
+
+
+message CheckPasswordRequest {
+    string passWord = 1;
+    string encryptedPassWord = 2;
+}
+
+message CheckPasswordResponse{
+    bool success = 1;
+}
+
+service UserService {
+    //获取用户列表
+    rpc GetUserList (GetUserRequest) returns (GetUserResponse) {}
+    //通过mobile查询用户
+    rpc GetUserByMobile (GetUserByMobileRequest) returns (GetUserByMobileResponse) {}
+    //通过id查询用户
+    rpc GetUserById (GetUserByIdRequest) returns (GetUserByIdResponse) {}
+    //创建用户
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {}
+       //更新用户信息
+    rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {}
+    //检查密码
+    rpc CheckPassword (CheckPasswordRequest) returns (CheckPasswordResponse) {}
+    // //删除用户
+    // rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse) {}
+}
+
+
+
+

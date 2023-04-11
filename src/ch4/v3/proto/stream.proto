@@ -5,20 +5,20 @@ option go_package=".;streampb";
 service Greeter {
    
     //服务端流模式
-    rpc ServerStream(streamRequest) returns (stream streamResponse);
+    rpc ServerStream(StreamRequest) returns (stream StreamResponse);
     //客户端流模式
-    rpc ClientStream(stream streamRequest) returns (streamResponse);
+    rpc ClientStream(stream StreamRequest) returns (StreamResponse);
     //双向流模式
-    rpc AllStreeam(stream streamRequest) returns (stream streamResponse);
+    rpc AllStreeam(stream StreamRequest) returns (stream StreamResponse);
 }
 
 
 
-message streamRequest {
+message StreamRequest {
     string data = 1;
 }
 
 
-message streamResponse {
+message StreamResponse {
     string data = 1 ;
 }

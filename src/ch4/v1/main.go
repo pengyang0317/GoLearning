@@ -23,6 +23,6 @@ func main() {
 	jsonStrut := Hello{Name: "pengze"}
 	jsonReq, _ := json.Marshal(jsonStrut)
 
-	fmt.Printf("%v,%v\n", by, string(by))
-	fmt.Printf("%v,%v", jsonReq, string(jsonReq))
+	fmt.Printf("我是protobuf数据%v,%v\n", by, string(by))
+	fmt.Printf("我是json数据%v,%v", jsonReq, string(jsonReq))
 }

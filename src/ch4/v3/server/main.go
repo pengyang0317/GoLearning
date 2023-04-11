@@ -1,7 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"net"
+	"sync"
+	"time"
 
 	streampb "lgo/src/ch4/v3/proto"
 
@@ -13,17 +16,65 @@ type Server struct {
 }
 
 // 服务端流模式
-func (s *Server) ServerStream(*streampb.StreamRequest, streampb.Greeter_ServerStreamServer) error {
+func (s *Server) ServerStream(req *streampb.StreamRequest, res streampb.Greeter_ServerStreamServer) error {
+	i := 0
+	for {
+		i++
+		_ = res.Send(&streampb.StreamResponse{
+			Data: fmt.Sprintf("%v", req),
+		})
+		time.Sleep(time.Second)
+		if i > 10 {
+			break
+		}
+	}
 	return nil
 }
 
 // 客户端流模式
-func (s *Server) ClientStream(streampb.Greeter_ClientStreamServer) error {
-	return nil
+func (s *Server) ClientStream(res streampb.Greeter_ClientStreamServer) error {
+
+	for {
+		req, err := streampb.Greeter_ClientStreamServer.Recv(res)
+		if err != nil {
+			return err
+		}
+		fmt.Println(req)
+	}
+
 }
 
 // 双向流模式
-func (s *Server) AllStreeam(streampb.Greeter_AllStreeamServer) error {
+func (s *Server) AllStreeam(allStream streampb.Greeter_AllStreeamServer) error {
+	wg := sync.WaitGroup{}
+	wg.Add(2)
+
+	go func() {
+		defer wg.Done()
+		for {
+			req, err := streampb.Greeter_AllStreeamServer.Recv(allStream)
+			if err != nil {
+				return
+			}
+			fmt.Println(req)
+		}
+	}()
+
+	go func() {
+		defer wg.Done()
+		i := 0
+		for {
+			i++
+			_ = allStream.Send(&streampb.StreamResponse{
+				Data: fmt.Sprintf("我是服务端发送的数据" ),
+			})
+			time.Sleep(time.Second)
+			if i > 5 {
+				break
+			}
+		}
+	}()
+	wg.Wait()
 	return nil
 }
 
@@ -46,5 +97,5 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
+	fmt.Println("启动成功")
 }

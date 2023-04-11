@@ -13,7 +13,7 @@ type Server struct {
 	hellopb.UnimplementedGreeterServer
 }
 
-func (s *Server) SayHello(ctx context.Context, in *hellopb.HelloRequest) (*hellopb.HelloResponse, error) {
+func (s *Server) SayHello(ctx context.Context, in *hellopb.HelloRequesto) (*hellopb.HelloResponse, error) {
 	return &hellopb.HelloResponse{
 		Message: "Hello " + in.Name,
 	}, nil
