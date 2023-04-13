@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"crypto/sha512"
+	"fmt"
 	"lgo/pz-shop-server/user-srv/global"
 	"strings"
 	"time"
@@ -110,6 +111,11 @@ func (s *UserServer) CreateUser(ctx context.Context, req *userpb.CreateUserReque
 	user.Mobile = req.Mobile
 	user.NickName = req.NickName
 	user.PassWord = req.PassWord
+
+	//密码加密
+	options := &password.Options{SaltLen: 16, Iterations: 100, KeyLen: 32, HashFunction: sha512.New}
+	salt, encodedPwd := password.Encode(req.PassWord, options)
+	user.PassWord = fmt.Sprintf("$pbkdf2-sha512$%s$%s", salt, encodedPwd)
 
 	tx = global.DB.Create(user)
 	if tx.Error != nil { // 查询失败

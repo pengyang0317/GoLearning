@@ -72,7 +72,7 @@ func TestCreateUser(t *testing.T) {
 	//调用CreateUser
 	res, err := userServer.CreateUser(context.Background(), &userpb.CreateUserRequest{
 		NickName: "test-NickName",
-		Mobile:   "18211112435",
+		Mobile:   "18210437835",
 		PassWord: "123456",
 	})
 
