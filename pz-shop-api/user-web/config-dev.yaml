@@ -2,3 +2,5 @@ server_info:
   host: '127.0.0.1'
   port: 8801
   group: 'dev'
+jwt:
+  key: 'pengze'
