@@ -13,4 +13,6 @@ var (
 	ConfigYaml *config.ConfigYaml = &config.ConfigYaml{}
 
 	UserServiceClient userpb.UserServiceClient
+
+	
 )

@@ -30,6 +30,9 @@ func main() {
 		panic(err)
 	}
 
+	// 注册服务
+	initlalize.InitSrvConn()
+
 	zap.S().Debugf("启动服务器, 端口： %d", global.ConfigYaml.ServerInfo.Port)
 	if err := Router.Run(fmt.Sprintf(":%d", global.ConfigYaml.ServerInfo.Port)); err != nil {
 		zap.S().Errorf("启动服务失败，err:%s", err.Error())

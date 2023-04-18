@@ -1,6 +1,7 @@
 package global
 
 import (
+	"lgo/pz-shop-server/user-srv/config"
 	"log"
 	"os"
 	"time"
@@ -12,7 +13,8 @@ import (
 )
 
 var (
-	DB *gorm.DB
+	DB         *gorm.DB
+	ConfigYaml *config.ConfigYaml = &config.ConfigYaml{}
 )
 
 // 初始化数据库连接

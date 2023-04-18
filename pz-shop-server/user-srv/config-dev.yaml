@@ -1,0 +1,14 @@
+server_info:
+  host: '192.168.0.104'
+  port: 8000
+  group: 'dev'
+mysql_info:
+  user: "root"
+  password: "123456"
+  host: "127.0.0.1"
+  port: 3307
+  name: "pzshop_user_srv"
+consul_info:
+  host: "127.0.0.1"
+  port: 8500
+  name: "consule-pengze"

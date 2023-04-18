@@ -7,8 +7,8 @@ import (
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 
-	"lgo/pz-shop-api/user-web/config"
-	"lgo/pz-shop-api/user-web/global"
+	"lgo/pz-shop-server/user-srv/config"
+	"lgo/pz-shop-server/user-srv/global"
 )
 
 func GetEnvInfo(env string) bool {
@@ -26,7 +26,6 @@ func initConfigFileName(v *viper.Viper) {
 	if debug {
 		configFileName = fmt.Sprintf("%s-dev.yaml", configFilePrefix)
 	}
-	zap.S().Infof("读取配置文件的环境: %s", configFileName)
 
 	v.SetConfigFile(configFileName)
 }
@@ -67,6 +66,6 @@ func InitConfig() {
 	readInConfigAndUnmarshal(v, global.ConfigYaml)
 
 	WatchConfig(v, global.ConfigYaml)
-	zap.S().Info(global.ConfigYaml)
+
 	zap.S().Info("init config success")
 }

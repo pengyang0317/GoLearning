@@ -10,7 +10,10 @@
             "request": "launch",
             "mode": "debug",
             "program": "${file}",
-            "debugAdapter": "dlv-dap"
+            "debugAdapter": "dlv-dap",
+            // "env": {
+            //     "PZSHOP_DEV": true
+            // }
         }
     ]
 }

@@ -1,18 +1,28 @@
 package user
 
 import (
-	global "lgo/pz-shop-server/user-srv/global"
-	"lgo/pz-shop-server/user-srv/handler"
-	model "lgo/pz-shop-server/user-srv/model"
+	"context"
+	"fmt"
+	userpb "lgo/pz-shop-server/user-srv/proto"
 	"testing"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
-// 测试 GetUserList
 func TestGetUserList(t *testing.T) {
-	// 初始化数据库
-	global.Init()
-
-
-
+	conn, err := grpc.Dial("127.0.0.1:8000", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		panic(err)
+	}
+	userClient := userpb.NewUserServiceClient(conn)
+	rsp, err := userClient.GetUserList(context.Background(), &userpb.GetUserRequest{
+		Page: 1,
+		Size: 5,
+	})
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(rsp)
 
 }

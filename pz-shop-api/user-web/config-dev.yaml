@@ -4,3 +4,8 @@ server_info:
   group: 'dev'
 jwt:
   key: 'pengze'
+
+consul_info:
+  host: '127.0.0.1'
+  port: 8500
+  name: 'pengze-shop-web'
