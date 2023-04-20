@@ -5,6 +5,7 @@ type ServerInfo struct {
 	Port    int       `mapstructure:"port"`
 	Group   string    `mapstructure:"group"`
 	JWTInfo JWTConfig `mapstructure:"jwt" json:"jwt"`
+	Name    string    `mapstructure:"name"`
 }
 
 type ConsulInfo struct {

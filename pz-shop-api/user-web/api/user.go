@@ -49,13 +49,13 @@ func HandleValidatorError(ctx *gin.Context, err error) {
 func GetUserList(ctx *gin.Context) {
 	zap.S().Info("获取user列表")
 
-	conn, err := grpc.Dial("127.0.0.1:8000", grpc.WithTransportCredentials(insecure.NewCredentials()))
-	defer conn.Close()
-	if err != nil {
-		zap.S().Error("[GetUserList] 连接 [用户服务失败]", err)
-	}
+	// conn, err := grpc.Dial("127.0.0.1:8000", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	// defer conn.Close()
+	// if err != nil {
+	// 	zap.S().Error("[GetUserList] 连接 [用户服务失败]", err)
+	// }
 
-	userClient := userpb.NewUserServiceClient(conn)
+	// userClient := userpb.NewUserServiceClient(conn)
 
 	claims, _ := ctx.Get("claims")
 	currentUser := claims.(*models.CustomClaims)
@@ -66,7 +66,7 @@ func GetUserList(ctx *gin.Context) {
 	pSize := ctx.DefaultQuery("psize", "10")
 	pSizeInt, _ := strconv.Atoi(pSize)
 
-	userList, err := userClient.GetUserList(ctx, &userpb.GetUserRequest{
+	userList, err := global.UserServiceClient.GetUserList(ctx, &userpb.GetUserRequest{
 		Size: int32(pSizeInt),
 		Page: int32(pnInt),
 	})
