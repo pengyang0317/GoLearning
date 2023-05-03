@@ -1,7 +1,7 @@
 package global
 
 import (
-	"lgo/pz-shop-server/user-srv/config"
+	"lgo/pz-shop-rpc/user-srv/config"
 	"log"
 	"os"
 	"time"
@@ -13,8 +13,9 @@ import (
 )
 
 var (
-	DB         *gorm.DB
-	ConfigYaml *config.ConfigYaml = &config.ConfigYaml{}
+	DB           *gorm.DB
+	ServerConfig *config.ServerConfig = &config.ServerConfig{}
+	NacosConfig  *config.NacosConfig  = &config.NacosConfig{}
 )
 
 // 初始化数据库连接

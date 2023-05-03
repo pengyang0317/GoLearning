@@ -1,0 +1,6 @@
+
+host: "127.0.0.1"
+port: 8848
+namespace: "139058a1-5292-42ce-aed0-ac2c48a19896"
+dataId: "user-src-dev.json"
+group: "develop"

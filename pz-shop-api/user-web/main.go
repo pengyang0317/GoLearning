@@ -16,6 +16,9 @@ func main() {
 	// 初始化配置文件
 	initlalize.InitConfig()
 
+	// 初始化Redis
+	initlalize.InitRedis()
+
 	// 初始化翻译器
 	if err := initlalize.InitTrans("zh"); err != nil {
 		zap.S().Errorf("初始化翻译器失败，err:%s", err.Error())

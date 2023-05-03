@@ -7,10 +7,15 @@ import (
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 
-	"lgo/pz-shop-server/user-srv/config"
-	"lgo/pz-shop-server/user-srv/global"
+	"lgo/pz-shop-rpc/user-srv/config"
+	"lgo/pz-shop-rpc/user-srv/global"
 )
 
+var (
+	ServerConfig = global.ServerConfig
+)
+
+// 读取系统环境变量
 func GetEnvInfo(env string) bool {
 	viper.AutomaticEnv()
 	return viper.GetBool(env)
@@ -18,34 +23,35 @@ func GetEnvInfo(env string) bool {
 
 // 初始化读取配置文件
 func initConfigFileName(v *viper.Viper) {
-	debug := GetEnvInfo("PZSHOP_DEV")
+	isDev := GetEnvInfo("PZSHOP_DEV")
 
 	configFilePrefix := "config"
 	configFileName := fmt.Sprintf("%s-pro.yaml", configFilePrefix)
 
-	if debug {
+	if isDev {
 		configFileName = fmt.Sprintf("%s-dev.yaml", configFilePrefix)
 	}
 
+	zap.S().Infof("当前的配置文件是: %s\n", configFileName)
 	v.SetConfigFile(configFileName)
 }
 
 // 动态监听 配置文件的变化
-func WatchConfig(v *viper.Viper, ServerInfo *config.ConfigYaml) {
+func WatchConfig(v *viper.Viper, ServerInfo *config.ServerConfig) {
 
 	// 动态监听 yaml的变化
 	v.WatchConfig()
 
 	// 监听配置变化
 	v.OnConfigChange(func(e fsnotify.Event) {
-		zap.S().Infof("Config file changed: %s \n", e.Name)
+		zap.S().Infof("修改了配置文件: %s \n", e.Name)
 		readInConfigAndUnmarshal(v, ServerInfo)
 	})
 
 }
 
 // 读取配置文件并解析结构体
-func readInConfigAndUnmarshal(v *viper.Viper, ServerInfo *config.ConfigYaml) {
+func readInConfigAndUnmarshal(v *viper.Viper, ServerInfo *config.ServerConfig) {
 	if err := v.ReadInConfig(); err != nil {
 		zap.S().Errorf("Fatal error config file: %s \n", err)
 		panic(err)
@@ -63,9 +69,9 @@ func InitConfig() {
 
 	initConfigFileName(v)
 
-	readInConfigAndUnmarshal(v, global.ConfigYaml)
+	readInConfigAndUnmarshal(v, ServerConfig)
 
-	WatchConfig(v, global.ConfigYaml)
+	WatchConfig(v, ServerConfig)
 
-	zap.S().Info("init config success")
+	zap.S().Infof("初始化配置文件成功: %#v \n", ServerConfig.ServerInfo)
 }

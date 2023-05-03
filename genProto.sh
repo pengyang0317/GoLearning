@@ -11,16 +11,16 @@ function genProto {
    
 }
 
-genProto hello  ch4/v2
-genProto stream  ch4/v3
+# genProto hello  ch4/v2
+# genProto stream  ch4/v3
 
 
 
 function genPzShopServer {
     DOMAIN=$1
     FileAddress=$2
-    PROTO_PATH=./pz-shop-server/$FileAddress/proto
-    GO_OUT_PATH=./pz-shop-server/$FileAddress/proto
+    PROTO_PATH=./pz-shop-rpc/$FileAddress/proto
+    GO_OUT_PATH=./pz-shop-rpc/$FileAddress/proto
 
     GO_OUT_API_PATH="./pz-shop-api/$DOMAIN-web/proto"
     protoc -I=$PROTO_PATH --go_out=paths=source_relative:$GO_OUT_PATH ${DOMAIN}.proto

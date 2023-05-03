@@ -4,6 +4,7 @@ import (
 	"lgo/pz-shop-api/user-web/config"
 
 	ut "github.com/go-playground/universal-translator"
+	"github.com/go-redis/redis"
 
 	userpb "lgo/pz-shop-api/user-web/proto"
 )
@@ -14,5 +15,5 @@ var (
 
 	UserServiceClient userpb.UserServiceClient
 
-	
+	Rdb  		   *redis.Client
 )

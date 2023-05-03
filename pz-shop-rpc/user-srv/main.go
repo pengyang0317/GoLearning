@@ -8,11 +8,11 @@ import (
 	"os/signal"
 	"syscall"
 
-	"lgo/pz-shop-server/user-srv/global"
-	"lgo/pz-shop-server/user-srv/handler"
-	"lgo/pz-shop-server/user-srv/initlalize"
-	userpb "lgo/pz-shop-server/user-srv/proto"
-	"lgo/pz-shop-server/user-srv/utils"
+	"lgo/pz-shop-rpc/user-srv/global"
+	"lgo/pz-shop-rpc/user-srv/handler"
+	"lgo/pz-shop-rpc/user-srv/initlalize"
+	userpb "lgo/pz-shop-rpc/user-srv/proto"
+	"lgo/pz-shop-rpc/user-srv/utils"
 
 	"github.com/hashicorp/consul/api"
 	uuid "github.com/satori/go.uuid"
@@ -30,7 +30,7 @@ var (
 
 // 服务注册
 func ServiceRegister(server *grpc.Server) *api.Client {
-	ConsulInfo := global.ConfigYaml.ConsulInfo
+	ConsulInfo := global.ServerConfig.ConsulInfo
 	//注册服务健康检查
 	grpc_health_v1.RegisterHealthServer(server, health.NewServer())
 
@@ -69,25 +69,23 @@ func ServiceRegister(server *grpc.Server) *api.Client {
 	return client
 }
 
-func main() {
-	initlalize.InitLogger()
-	initlalize.InitConfig()
-	initlalize.InitDB()
+var server_info = &global.ServerConfig.ServerInfo
+var server *grpc.Server = grpc.NewServer()
 
-	server_info := global.ConfigYaml.ServerInfo
-
+// 启动地址
+func ipPort() {
 	IP = flag.String("ip", server_info.Host, "IP address")
+	zap.S().Infof("我是启动地址:%s", *IP)
 	Port = flag.Int("port", 0, "Port number")
-
 	flag.Parse()
-
-	server := grpc.NewServer()
-
-	userpb.RegisterUserServiceServer(server, &handler.UserServer{})
-
 	if *Port == 0 {
 		*Port, _ = utils.GetFreePort()
 	}
+}
+
+// 启动服务，并且注册到consul
+func RegisterHealthServer() {
+	userpb.RegisterUserServiceServer(server, &handler.UserServer{})
 
 	client := ServiceRegister(server)
 
@@ -114,4 +112,13 @@ func main() {
 		zap.S().Info("注销失败")
 	}
 	zap.S().Info("注销成功")
+}
+
+func main() {
+	initlalize.InitLogger()
+	initlalize.InitConfig()
+	initlalize.InItNacos()
+	initlalize.InitDB()
+	ipPort()
+	RegisterHealthServer()
 }

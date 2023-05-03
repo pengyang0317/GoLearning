@@ -12,3 +12,4 @@ func ValidateMobile(fl validator.FieldLevel) bool {
 	ok, _ := regexp.MatchString(`^1[23456789]\d{9}$`, mobile)
 	return ok
 }
+

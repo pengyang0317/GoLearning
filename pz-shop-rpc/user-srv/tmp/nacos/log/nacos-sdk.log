@@ -1,0 +1,39 @@
+2023-05-03T16:48:31.175+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T16:51:37.637+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T16:56:17.981+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T16:57:07.279+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T16:58:19.499+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T16:59:48.859+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T17:00:12.069+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T17:00:46.113+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T17:13:04.879+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T17:14:20.989+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T17:49:32.578+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T17:49:33.082+0800	[34mINFO[0m	config_client/config_proxy.go:180	[client.ListenConfig] request params:map[Listening-Configs:user-src-dev.jsondevelop073bfcc32e5ca029867b373b3c347351139058a1-5292-42ce-aed0-ac2c48a19896 tenant:139058a1-5292-42ce-aed0-ac2c48a19896] header:map[Content-Type:application/x-www-form-urlencoded;charset=utf-8 Long-Pulling-Timeout:30000 Long-Pulling-Timeout-No-Hangup:true accessKey: secretKey:] 
+
+2023-05-03T17:49:33.087+0800	[34mINFO[0m	config_client/config_client.go:433	[client.ListenConfig] no change
+2023-05-03T17:49:33.098+0800	[34mINFO[0m	config_client/config_proxy.go:180	[client.ListenConfig] request params:map[Listening-Configs:user-src-dev.jsondevelop073bfcc32e5ca029867b373b3c347351139058a1-5292-42ce-aed0-ac2c48a19896 tenant:139058a1-5292-42ce-aed0-ac2c48a19896] header:map[Content-Type:application/x-www-form-urlencoded;charset=utf-8 Long-Pulling-Timeout:30000 accessKey: secretKey:] 
+
+2023-05-03T17:49:52.682+0800	[34mINFO[0m	config_client/config_client.go:435	[client.ListenConfig] config changed:user-src-dev.json%02develop%02139058a1-5292-42ce-aed0-ac2c48a19896%01
+
+2023-05-03T17:49:52.700+0800	[34mINFO[0m	config_client/config_proxy.go:180	[client.ListenConfig] request params:map[Listening-Configs:user-src-dev.jsondevelop13caf6f3799fd76ad53cbc6f9741a816139058a1-5292-42ce-aed0-ac2c48a19896 tenant:139058a1-5292-42ce-aed0-ac2c48a19896] header:map[Content-Type:application/x-www-form-urlencoded;charset=utf-8 Long-Pulling-Timeout:30000 accessKey: secretKey:] 
+
+2023-05-03T17:50:19.195+0800	[34mINFO[0m	config_client/config_client.go:435	[client.ListenConfig] config changed:user-src-dev.json%02develop%02139058a1-5292-42ce-aed0-ac2c48a19896%01
+
+2023-05-03T17:50:19.212+0800	[34mINFO[0m	config_client/config_proxy.go:180	[client.ListenConfig] request params:map[Listening-Configs:user-src-dev.jsondevelop0585e8e31a0d0bc279b781a17d927848139058a1-5292-42ce-aed0-ac2c48a19896 tenant:139058a1-5292-42ce-aed0-ac2c48a19896] header:map[Content-Type:application/x-www-form-urlencoded;charset=utf-8 Long-Pulling-Timeout:30000 accessKey: secretKey:] 
+
+2023-05-03T17:50:48.719+0800	[34mINFO[0m	config_client/config_client.go:433	[client.ListenConfig] no change
+2023-05-03T17:50:48.730+0800	[34mINFO[0m	config_client/config_proxy.go:180	[client.ListenConfig] request params:map[Listening-Configs:user-src-dev.jsondevelop0585e8e31a0d0bc279b781a17d927848139058a1-5292-42ce-aed0-ac2c48a19896 tenant:139058a1-5292-42ce-aed0-ac2c48a19896] header:map[Content-Type:application/x-www-form-urlencoded;charset=utf-8 Long-Pulling-Timeout:30000 accessKey: secretKey:] 
+
+2023-05-03T17:51:18.238+0800	[34mINFO[0m	config_client/config_client.go:433	[client.ListenConfig] no change
+2023-05-03T17:51:18.248+0800	[34mINFO[0m	config_client/config_proxy.go:180	[client.ListenConfig] request params:map[Listening-Configs:user-src-dev.jsondevelop0585e8e31a0d0bc279b781a17d927848139058a1-5292-42ce-aed0-ac2c48a19896 tenant:139058a1-5292-42ce-aed0-ac2c48a19896] header:map[Content-Type:application/x-www-form-urlencoded;charset=utf-8 Long-Pulling-Timeout:30000 accessKey: secretKey:] 
+
+2023-05-03T17:51:47.755+0800	[34mINFO[0m	config_client/config_client.go:433	[client.ListenConfig] no change
+2023-05-03T17:51:47.765+0800	[34mINFO[0m	config_client/config_proxy.go:180	[client.ListenConfig] request params:map[Listening-Configs:user-src-dev.jsondevelop0585e8e31a0d0bc279b781a17d927848139058a1-5292-42ce-aed0-ac2c48a19896 tenant:139058a1-5292-42ce-aed0-ac2c48a19896] header:map[Content-Type:application/x-www-form-urlencoded;charset=utf-8 Long-Pulling-Timeout:30000 accessKey: secretKey:] 
+
+2023-05-03T17:52:17.271+0800	[34mINFO[0m	config_client/config_client.go:433	[client.ListenConfig] no change
+2023-05-03T17:52:17.282+0800	[34mINFO[0m	config_client/config_proxy.go:180	[client.ListenConfig] request params:map[Listening-Configs:user-src-dev.jsondevelop0585e8e31a0d0bc279b781a17d927848139058a1-5292-42ce-aed0-ac2c48a19896 tenant:139058a1-5292-42ce-aed0-ac2c48a19896] header:map[Content-Type:application/x-www-form-urlencoded;charset=utf-8 Long-Pulling-Timeout:30000 accessKey: secretKey:] 
+
+2023-05-03T17:52:46.788+0800	[34mINFO[0m	config_client/config_client.go:433	[client.ListenConfig] no change
+2023-05-03T17:52:46.800+0800	[34mINFO[0m	config_client/config_proxy.go:180	[client.ListenConfig] request params:map[Listening-Configs:user-src-dev.jsondevelop0585e8e31a0d0bc279b781a17d927848139058a1-5292-42ce-aed0-ac2c48a19896 tenant:139058a1-5292-42ce-aed0-ac2c48a19896] header:map[Content-Type:application/x-www-form-urlencoded;charset=utf-8 Long-Pulling-Timeout:30000 accessKey: secretKey:] 
+

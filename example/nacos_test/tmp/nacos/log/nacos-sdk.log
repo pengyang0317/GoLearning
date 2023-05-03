@@ -1,0 +1,12 @@
+2023-05-03T15:49:59.011+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T15:50:31.064+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T16:00:07.816+0800	[34mINFO[0m	clients/client_factory.go:47	logDir:<./tmp/nacos/log>   cacheDir:<./tmp/nacos/cache>
+2023-05-03T16:00:08.319+0800	[34mINFO[0m	config_client/config_proxy.go:180	[client.ListenConfig] request params:map[Listening-Configs:user-src-dev.yamldevelop612a33e715cc155aabae7183d2959ccd139058a1-5292-42ce-aed0-ac2c48a19896 tenant:139058a1-5292-42ce-aed0-ac2c48a19896] header:map[Content-Type:application/x-www-form-urlencoded;charset=utf-8 Long-Pulling-Timeout:30000 Long-Pulling-Timeout-No-Hangup:true accessKey: secretKey:] 
+
+2023-05-03T16:00:08.434+0800	[34mINFO[0m	config_client/config_client.go:433	[client.ListenConfig] no change
+2023-05-03T16:00:08.445+0800	[34mINFO[0m	config_client/config_proxy.go:180	[client.ListenConfig] request params:map[Listening-Configs:user-src-dev.yamldevelop612a33e715cc155aabae7183d2959ccd139058a1-5292-42ce-aed0-ac2c48a19896 tenant:139058a1-5292-42ce-aed0-ac2c48a19896] header:map[Content-Type:application/x-www-form-urlencoded;charset=utf-8 Long-Pulling-Timeout:30000 accessKey: secretKey:] 
+
+2023-05-03T16:00:35.053+0800	[34mINFO[0m	config_client/config_client.go:435	[client.ListenConfig] config changed:user-src-dev.yaml%02develop%02139058a1-5292-42ce-aed0-ac2c48a19896%01
+
+2023-05-03T16:00:35.073+0800	[34mINFO[0m	config_client/config_proxy.go:180	[client.ListenConfig] request params:map[Listening-Configs:user-src-dev.yamldevelopf0a84b33a41809e4ffeccca512cda0c7139058a1-5292-42ce-aed0-ac2c48a19896 tenant:139058a1-5292-42ce-aed0-ac2c48a19896] header:map[Content-Type:application/x-www-form-urlencoded;charset=utf-8 Long-Pulling-Timeout:30000 accessKey: secretKey:] 
+

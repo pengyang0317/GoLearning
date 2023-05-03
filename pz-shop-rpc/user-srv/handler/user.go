@@ -4,12 +4,12 @@ import (
 	"context"
 	"crypto/sha512"
 	"fmt"
-	"lgo/pz-shop-server/user-srv/global"
+	"lgo/pz-shop-rpc/user-srv/global"
 	"strings"
 	"time"
 
-	"lgo/pz-shop-server/user-srv/model"
-	userpb "lgo/pz-shop-server/user-srv/proto"
+	"lgo/pz-shop-rpc/user-srv/model"
+	userpb "lgo/pz-shop-rpc/user-srv/proto"
 
 	"github.com/anaskhan96/go-password-encoder"
 	"google.golang.org/grpc/codes"
@@ -70,15 +70,33 @@ func (s *UserServer) GetUserByMobile(ctx context.Context, req *userpb.GetUserByM
 
 }
 
-func (s *UserServer) GetUserById(ctx context.Context, req *userpb.GetUserByIdRequest) (*userpb.GetUserByIdResponse, error) {
+func ModelToGetUserByIdResponse(user *model.User) *userpb.GetUserByIdResponse {
+	req := &userpb.GetUserByIdResponse{
+		User: &userpb.User{
+			Id:       user.ID,
+			PassWord: user.PassWord,
+			NickName: user.NickName,
+			Gender:   user.Gender,
+			Role:     int32(user.Role),
+			Mobile:   user.Mobile,
+		},
+	}
+	if user.BirthDay != nil {
+		req.User.BirthDay = uint64(user.BirthDay.Unix())
+	}
+	return req
 
-	user := &userpb.User{}
+}
+
+func (s *UserServer) GetUserById(ctx context.Context, req *userpb.GetUserByIdRequest) (*userpb.GetUserByIdResponse, error) {
+	user := &model.User{}
 	tx := global.DB.Where("id = ?", req.Id).First(user)
 	if tx.Error != nil { // 查询失败
 		return nil, tx.Error
 	}
 
-	return &userpb.GetUserByIdResponse{User: user}, nil
+	results := ModelToGetUserByIdResponse(user)
+	return results, nil
 }
 
 func ModelToCreateUserResponse(user *model.User) *userpb.CreateUserResponse {

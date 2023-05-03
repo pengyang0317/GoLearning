@@ -1,0 +1,17 @@
+syntax = "proto3";
+option go_package=".;protoapipb";
+
+message RegisterForm {
+    string Mobile = 1 ;
+    string PassWord = 2;
+    string Code = 3;
+}
+
+
+
+message SendSmsForm {
+    string Mobile = 1 ;
+    uint32 Type = 2;
+    string Code =3;
+}
+
