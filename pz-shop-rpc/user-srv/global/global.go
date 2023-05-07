@@ -42,7 +42,7 @@ func Init() {
 		panic(err)
 	}
 
-	// 创建表
+	// // 创建表
 	// DB.AutoMigrate(&model.User{})
 
 }

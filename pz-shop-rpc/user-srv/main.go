@@ -89,8 +89,7 @@ func RegisterHealthServer() {
 
 	client := ServiceRegister(server)
 
-	zap.S().Infof("user-src服务启动%s", fmt.Sprintf("%s:%d", *IP, *Port))
-
+    // 监听端口
 	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%d", *IP, *Port))
 
 	if err != nil {
@@ -98,6 +97,7 @@ func RegisterHealthServer() {
 	}
 
 	go func() {
+        // 启动服务
 		error := server.Serve(lis)
 		if error != nil {
 			panic("failed to serve:" + error.Error())
@@ -108,6 +108,7 @@ func RegisterHealthServer() {
 	quit := make(chan os.Signal)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
+    // 注销服务
 	if err = client.Agent().ServiceDeregister(serviceID); err != nil {
 		zap.S().Info("注销失败")
 	}

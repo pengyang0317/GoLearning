@@ -21,11 +21,7 @@ message CategoryBriefInfoResponse {
     string name = 2;
 }
 
-message BrandInfoResponse {
-    int32 id = 1;
-    string name = 2;
-    string logo = 3;
-}
+
 
 message GoodsInfoResponse {
     int32 id = 1;
@@ -56,7 +52,88 @@ message GoodsListResponse {
     repeated GoodsInfoResponse data = 2;
 }
 
+message BrandFilterRequest  {
+    int32 PageNum = 1;
+    int32 PageSize = 2;
+}
+
+
+message BrandInfoResponse {
+    int32 id = 1;
+    string name = 2;
+    string logo = 3;
+}
+message BrandListResponse {
+    int32 total = 1;
+    repeated BrandInfoResponse data = 2;
+}
+
+message BrandRequest {
+    int32 id = 1;
+    string name = 2;
+    string logo = 3;
+}
+
+
+message BrandResponse {
+    int32 id = 1;
+    string name = 2;
+    string logo = 3;
+}
+
+
+message CategoryBrandFilterRequest {
+    int32 PageNum = 1;
+    int32 PageSize = 2;
+}
+
+message CategoryBrandRequest{
+    int32 id = 1;
+    int32 categoryId = 2;
+    int32 brandId = 3;
+}
+message CategoryInfoResponse {
+    int32 id = 1;
+    string name = 2;
+    int32 parentCategory = 3;
+    int32 level = 4;
+    bool isTab = 5;
+}
+message CategoryBrandResponse{
+    int32 id = 1;
+    BrandInfoResponse brand = 2;
+    CategoryInfoResponse category = 3;
+}
+
+message CategoryBrandListResponse {
+    int32 total = 1;
+    repeated CategoryBrandResponse data = 2;
+}
+message CategoryInfoRequest {
+    int32 id = 1;
+    string name = 2;
+    int32 parentCategory = 3;
+    int32 level = 4;
+    bool isTab = 5;
+}
+
 service Goods{
-        //商品接口
-        rpc GoodsList(GoodsFilterRequest) returns(GoodsListResponse);
+    //商品接口
+    // rpc GoodsList(GoodsFilterRequest) returns(GoodsListResponse);
+
+    //品牌
+    rpc BrandList(BrandFilterRequest) returns(BrandListResponse);
+    rpc CreateBrand(BrandRequest) returns(BrandInfoResponse);
+    rpc UpdateBrand(BrandRequest) returns(google.protobuf.Empty);
+    rpc DeleteBrand(BrandRequest) returns(google.protobuf.Empty);
+
+
+
+    //品牌分类
+    rpc CategoryBrandList(CategoryBrandFilterRequest) returns(CategoryBrandListResponse); //获取轮播列表信息
+    //通过category获取brands
+    rpc GetCategoryBrandList(CategoryInfoRequest) returns(BrandListResponse);
+    rpc CreateCategoryBrand(CategoryBrandRequest) returns(CategoryBrandResponse); //添加banner图
+    rpc DeleteCategoryBrand(CategoryBrandRequest) returns(google.protobuf.Empty); //删除轮播图
+    rpc UpdateCategoryBrand(CategoryBrandRequest) returns(google.protobuf.Empty); //修改轮播图
 }

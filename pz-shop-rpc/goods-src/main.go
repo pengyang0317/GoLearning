@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"lgo/pz-shop-rpc/goods-src/global"
+	"lgo/pz-shop-rpc/goods-src/handler"
 	"lgo/pz-shop-rpc/goods-src/initlalize"
+	"lgo/pz-shop-rpc/goods-src/proto"
 	"net"
 	"os"
 	"os/signal"
@@ -25,6 +27,8 @@ func main() {
 	initlalize.InitConfig()
 	initlalize.InItNacos()
 
+	initlalize.InitDB()
+
 	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%d", *global.StartServerIP, *global.StartServerPort))
 
 	if err != nil {
@@ -32,6 +36,7 @@ func main() {
 		panic(err)
 	}
 	server := grpc.NewServer()
+	proto.RegisterGoodsServer(server, &handler.GoodsServer{})
 
 	client := initlalize.InitConsul(server, serviceID)
 

@@ -1,13 +1,14 @@
 import json
 import socket
 
+# 发送数据
 
 request = {
     "id": 1,
     "params": ["pengze"],
     "method": "rpcServer.Hello"
 }
-
+# 创建socket连接
 client = socket.create_connection(("localhost", 9000))
 client.sendall(json.dumps(request).encode())
 
