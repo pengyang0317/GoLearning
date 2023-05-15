@@ -41,6 +41,7 @@ func InitDB() {
 	}
 	global.DB = db
 	// db.AutoMigrate(&model.Brand{})
-	db.AutoMigrate(&model.Category{})
+	// db.AutoMigrate(&model.Category{})
+	db.AutoMigrate(&model.Banner{})
 
 }

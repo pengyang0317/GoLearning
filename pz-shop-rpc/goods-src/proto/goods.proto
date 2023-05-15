@@ -117,6 +117,24 @@ message CategoryInfoRequest {
     bool isTab = 5;
 }
 
+message CategoryListResponse {
+    int32 total = 1;
+    repeated CategoryInfoResponse data = 2;
+    string jsonData = 3;
+}
+
+
+message CategoryListRequest {
+    int32 id =1;
+    int32 level = 2;
+}
+
+message SubCategoryListResponse {
+    int32 total = 1;
+    CategoryInfoResponse info = 2;
+    repeated CategoryInfoResponse subCategorys = 3;
+}
+
 service Goods{
     //商品接口
     // rpc GoodsList(GoodsFilterRequest) returns(GoodsListResponse);
@@ -129,6 +147,18 @@ service Goods{
 
 
 
+
+       //商品分类
+       rpc GetAllCategorysList(google.protobuf.Empty) returns(CategoryListResponse); //获取所有的分类
+       //获取子分类
+       rpc GetSubCategory(CategoryListRequest) returns(SubCategoryListResponse);
+       rpc CreateCategory(CategoryInfoRequest) returns(CategoryInfoResponse); //新建分类信息
+       rpc DeleteCategory(DeleteCategoryRequest) returns(google.protobuf.Empty); //删除分类
+       rpc UpdateCategory(CategoryInfoRequest) returns(google.protobuf.Empty); //修改分类信息
+
+    
+
+
     //品牌分类
     rpc CategoryBrandList(CategoryBrandFilterRequest) returns(CategoryBrandListResponse); //获取轮播列表信息
     //通过category获取brands
@@ -136,4 +166,39 @@ service Goods{
     rpc CreateCategoryBrand(CategoryBrandRequest) returns(CategoryBrandResponse); //添加banner图
     rpc DeleteCategoryBrand(CategoryBrandRequest) returns(google.protobuf.Empty); //删除轮播图
     rpc UpdateCategoryBrand(CategoryBrandRequest) returns(google.protobuf.Empty); //修改轮播图
+
+
+    //轮播图
+    rpc BannerList(google.protobuf.Empty) returns(BannerListResponse); //获取轮播列表信息
+    rpc CreateBanner(BannerRequest) returns(BannerResponse); //添加banner图
+    rpc DeleteBanner(BannerRequest) returns(google.protobuf.Empty); //删除轮播图
+    rpc UpdateBanner(BannerRequest) returns(google.protobuf.Empty); //修改轮播图
+}
+
+message DeleteCategoryRequest {
+    int32 id = 1;
+}
+
+
+
+
+// 轮播图
+message BannerListResponse {
+    int32 total = 1;
+    repeated BannerResponse data = 2;
+}
+
+message BannerResponse {
+    int32 id = 1;
+    int32 index = 2;
+    string image = 3;
+    string url = 4;
+}
+
+
+message BannerRequest {
+    int32 id = 1;
+    int32 index = 2;
+    string image = 3;
+    string url = 4;
 }
